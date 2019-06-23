@@ -1,40 +1,53 @@
 import React, { Component } from 'react';
+import './Weather.css';
 
 class Weather extends Component {
   constructor() {
     super();
     this.state = {
-      lat: 0,
-      long: 0
+      temp: 0,
+      clouds: 0,
+      humidity: 0,
+      windSpeed : 0,
+      cityName: '',
+      weather: '',
+      iconId: ''
     }
   }
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition((success) => {
-      fetch('https://api.openweathermap.org/data/2.5/weather?lat=47.2311225&lon=-1.5554265999999999&appid=a0f58b2016db39d35357ce3e8c76fcdf')
+      fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${success.coords.latitude}&lon=${success.coords.longitude}&appid=a0f58b2016db39d35357ce3e8c76fcdf`)
         .then(res => res.json())
         .then((res) =>   {
            console.log(res);
+           this.setState({
+            temp:res.main.temp,
+            clouds:res.clouds.all,
+            humidity:res.main.humidity,
+            windSpeed:res.wind.speed,
+            cityName:res.name,
+            weather:res.weather[0].description,
+            iconId: res.weather[0].icon
+           });
         })
-
-      this.setState({
-        lat: success.coords.latitude, //c'est la latitude récupéré dans l'objet qui s'affiche dans la console grâce au console.log(success)
-        long: success.coords.longitude,
-      });
-      console.log(success);
     }, (error) => {
       console.log(error);
       alert('Veuillez débloquer la géolocalisation de votre appareil !')
     });
-    console.log("test");
   };
 
   render() {
     return(
       <div className="App">
-          weather<br/>
-          {this.state.lat}<br/>
-          {this.state.long}
+          <h1>Ma station Meteo</h1>
+          <p>{this.state.cityName}</p>
+          <p><img src={`http://openweathermap.org/img/w/${this.state.iconId}.png`}/></p>
+          <p>{this.state.temp}°C</p>
+          <p>taux d'humidité dans l'air:<br/>{this.state.humidity}%</p>
+          <p>vitesse du vent:<br/>{this.state.windSpeed}km/h</p>
+          <p>{this.state.clouds}</p>
+          <p>{this.state.weather}</p>
       </div>
     )
   }
