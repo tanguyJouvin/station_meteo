@@ -52,8 +52,8 @@ class Weather extends Component {
                 <p>{this.state.temp}°C</p>
                 <p>taux d'humidité dans l'air:<br/>{this.state.humidity}%</p>
                 <p>vitesse du vent:<br/>{this.state.windSpeed}km/h</p>
-                <p>{this.state.clouds}</p>
-                <p>{this.state.weather}</p>
+                <p>nébulosité ambiante:<br/>{this.state.clouds}</p>
+                <p> état globale du temps:<br/>{this.state.weather}</p>
               </div>
             </div>
           </div>
