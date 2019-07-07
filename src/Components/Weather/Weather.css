@@ -1,8 +1,28 @@
+
+body {
+  color:black;
+  background-color:white;
+  background-attachment:fixed;
+  background-image: url("../../img/pngkey.com-san-francisco-skyline-silhouette-1768358.png");
+  background-repeat:no-repeat;
+}
+
 p {
-  color: rgb(61, 80, 33) ;
+  color: rgb(240, 243, 235) ;
   font-size: 1.2em;
+  font-family: ;
 }
 h1 {
   font-size: 3em;
   font-family: fantasy;
+}
+.weather {
+  border: 1px solid white;
+  margin-top: 2rem;
+  padding: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.iconW {
+  width: 5em;
+  height: 5em;
 }
